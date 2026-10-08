@@ -40,6 +40,19 @@ function setup() {
   const scrollToY = (top) => window.scrollTo({ top, behavior: reduceMotion ? "auto" : "smooth" });
   const section = $("donate");
 
+  const root = document.documentElement;
+  const actions = document.querySelector(".actions");
+
+  // While the donations are open, pin the tiles where they are so the panel only grows downward;
+  // released after it folds back, when the centered position is the same again (no jump).
+  const freeze = () => {
+    actions.style.setProperty("--tiles-top", `${parseFloat(getComputedStyle(section).marginBlockStart)}px`);
+    actions.classList.add("pinned");
+  };
+  const unfreeze = () => actions.classList.remove("pinned");
+  // Visible height above the fixed footer.
+  const viewHeight = () => window.innerHeight - document.querySelector(".footer").offsetHeight;
+
   const setOpen = (button, region, open) => {
     button.setAttribute("aria-expanded", String(open));
     region.classList.toggle("open", open);
@@ -52,7 +65,8 @@ function setup() {
   function collapseAll() {
     setOpen(toggle, panel, false);
     setOpen(bankToggle, bankPanel, false);
-    document.body.style.paddingBottom = "";
+    unfreeze();
+    root.style.paddingBottom = "";
     window.scrollTo(0, 0);
   }
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
@@ -62,26 +76,31 @@ function setup() {
   // When opened: scroll the logo out of view so the donation options sit in the middle of the screen.
   function centerDonations() {
     const rect = section.getBoundingClientRect();
-    const spare = Math.max(16, (window.innerHeight - rect.height) / 2);
+    const spare = Math.max(16, (viewHeight() - rect.height) / 2);
     const heroBottom = window.scrollY + document.querySelector(".hero").getBoundingClientRect().bottom;
     const target = Math.max(window.scrollY + rect.top - spare, heroBottom);
-    // Extra room at the bottom so the page can scroll that far (padding, not min-height, so the centered area does not grow).
-    const missing = target + window.innerHeight - document.documentElement.scrollHeight;
-    if (missing > 0) document.body.style.paddingBottom = `${missing}px`;
+    // Extra room at the bottom so the page can scroll that far; on <html>, outside the centered area.
+    const missing = target + window.innerHeight - root.scrollHeight;
+    if (missing > 0) root.style.paddingBottom = `${missing}px`;
     scrollToY(target);
   }
 
+  let foldTimer;
   toggle.addEventListener("click", () => {
     const open = !isOpen(toggle);
-    setOpen(toggle, panel, open);
+    clearTimeout(foldTimer);
     if (open) {
+      freeze();
+      setOpen(toggle, panel, true);
       setTimeout(centerDonations, reduceMotion ? 0 : 340);
     } else {
+      setOpen(toggle, panel, false);
       scrollToY(0);
-      setTimeout(() => {
+      foldTimer = setTimeout(() => {
         setOpen(bankToggle, bankPanel, false);
-        document.body.style.paddingBottom = "";
-      }, 400);
+        unfreeze();
+        root.style.paddingBottom = "";
+      }, reduceMotion ? 0 : 450);
     }
   });
 
@@ -90,7 +109,7 @@ function setup() {
     setOpen(bankToggle, bankPanel, open);
     if (open) {
       setTimeout(() => {
-        const overflow = bankPanel.getBoundingClientRect().bottom - (window.innerHeight - 16);
+        const overflow = bankPanel.getBoundingClientRect().bottom - (viewHeight() - 12);
         if (overflow > 0) window.scrollBy({ top: overflow, behavior: reduceMotion ? "auto" : "smooth" });
       }, reduceMotion ? 0 : 340);
     }
@@ -116,7 +135,7 @@ function setup() {
     }
     const app = APPS[btn.dataset.app];
     if (!app) {
-      show(copied ? "הועתק" : btn.dataset.copy);
+      show(copied ? "מספר החשבון הועתק" : btn.dataset.copy);
       return;
     }
     const url = appUrl(app);
