@@ -68,15 +68,6 @@ h1 {
 .dedication { font-family: var(--serif); font-size: var(--step-1); color: var(--ink-soft); margin-top: .5rem; }
 .address { color: var(--muted); margin-top: .25rem; }
 
-.jump { display: flex; justify-content: center; gap: .625rem; margin-top: 1.75rem; }
-.jump a {
-  min-height: 44px; display: inline-flex; align-items: center;
-  padding: 0 1.125rem; border-radius: 999px;
-  border: 1px solid var(--ink); color: var(--ink);
-  text-decoration: none; font-weight: 600;
-  transition: background-color var(--fast) var(--ease-out), color var(--fast) var(--ease-out);
-}
-.jump a:first-child { background: var(--ink); color: var(--stone); }
 
 /* Sections */
 .actions { display: grid; gap: 1.5rem; }
@@ -155,7 +146,6 @@ h2 { font-family: var(--serif); font-weight: 500; font-size: var(--step-2); line
 /* Focus and hover */
 a:focus-visible, button:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
 @media (hover: hover) {
-  .jump a:hover { background: var(--ink); color: var(--stone); }
   .action:not(:disabled):not([aria-disabled="true"]):hover { opacity: .85; }
   .wa-button:hover { transform: translateY(-1px); box-shadow: 0 14px 28px -8px rgba(18, 140, 74, .6), inset 0 1px 0 rgba(255, 255, 255, .25); }
   .footer a:hover span { color: var(--brass); }
