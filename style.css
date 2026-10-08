@@ -55,7 +55,7 @@ img { display: block; max-width: 100%; height: auto; }
 /* Hero */
 .hero { text-align: center; }
 .logo {
-  width: min(56vw, 210px); margin: 0 auto 1.25rem;
+  width: 120px; margin: 0 auto 1rem;
   filter: drop-shadow(0 6px 16px rgba(29, 27, 24, .12));
   animation: rise var(--enter) var(--ease-out) both;
 }
