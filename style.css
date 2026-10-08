@@ -107,6 +107,9 @@ h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-
 }
 .method-tap:active { background: var(--cream-btn); }
 .method-arrow { width: 22px; height: 22px; fill: var(--brass); }
+a.method-tap { text-decoration: none; }
+.contact-mark { display: grid; place-items: center; background: var(--cream-btn); color: var(--brass); }
+.contact-mark svg { width: 24px; height: 24px; fill: currentColor; }
 .copy-icon {
   width: 40px; height: 40px; flex: none;
   display: grid; place-items: center;
@@ -140,8 +143,6 @@ h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-
 .field-account dd { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .field-account .num { font-size: 1.625rem; font-weight: 700; letter-spacing: .04em; }
 
-.contact { margin-top: 1rem; font-size: var(--step--1); color: var(--muted); }
-.contact a { color: var(--ink); font-weight: 700; text-decoration: none; border-block-end: 1px solid var(--brass); }
 
 /* The two main tiles */
 .actions { gap: 1.25rem; }
@@ -225,6 +226,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--brass); outline
 .panel.open .methods > li { opacity: 1; transform: none; }
 .panel.open .methods > li:nth-child(2) { transition-delay: 50ms; }
 .panel.open .methods > li:nth-child(3) { transition-delay: 100ms; }
+.panel.open .methods > li:nth-child(4) { transition-delay: 150ms; }
 @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
