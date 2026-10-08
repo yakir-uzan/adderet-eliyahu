@@ -34,10 +34,30 @@ function setup() {
 
   const toggle = $("donate-toggle");
   const panel = $("donate-panel");
-  panel.inert = true;
+  const bankToggle = $("bank-toggle");
+  const bankPanel = $("bank-panel");
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const scrollToY = (top) => window.scrollTo({ top, behavior: reduceMotion ? "auto" : "smooth" });
   const section = $("donate");
+
+  const setOpen = (button, region, open) => {
+    button.setAttribute("aria-expanded", String(open));
+    region.classList.toggle("open", open);
+    region.inert = !open;
+  };
+  const isOpen = (button) => button.getAttribute("aria-expanded") === "true";
+
+  // Every fresh view of the page starts folded at the top, also when the browser restores it
+  // from its back/forward cache (e.g. coming back from Bit or PayBox).
+  function collapseAll() {
+    setOpen(toggle, panel, false);
+    setOpen(bankToggle, bankPanel, false);
+    document.body.style.paddingBottom = "";
+    window.scrollTo(0, 0);
+  }
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+  collapseAll();
+  window.addEventListener("pageshow", (e) => { if (e.persisted) collapseAll(); });
 
   // When opened: scroll the logo out of view so the donation options sit in the middle of the screen.
   function centerDonations() {
@@ -52,26 +72,22 @@ function setup() {
   }
 
   toggle.addEventListener("click", () => {
-    const open = toggle.getAttribute("aria-expanded") !== "true";
-    toggle.setAttribute("aria-expanded", String(open));
-    panel.classList.toggle("open", open);
-    panel.inert = !open;
+    const open = !isOpen(toggle);
+    setOpen(toggle, panel, open);
     if (open) {
       setTimeout(centerDonations, reduceMotion ? 0 : 340);
     } else {
       scrollToY(0);
-      setTimeout(() => { document.body.style.paddingBottom = ""; }, 400);
+      setTimeout(() => {
+        setOpen(bankToggle, bankPanel, false);
+        document.body.style.paddingBottom = "";
+      }, 400);
     }
   });
 
-  const bankToggle = $("bank-toggle");
-  const bankPanel = $("bank-panel");
-  bankPanel.inert = true;
   bankToggle.addEventListener("click", () => {
-    const open = bankToggle.getAttribute("aria-expanded") !== "true";
-    bankToggle.setAttribute("aria-expanded", String(open));
-    bankPanel.classList.toggle("open", open);
-    bankPanel.inert = !open;
+    const open = !isOpen(bankToggle);
+    setOpen(bankToggle, bankPanel, open);
     if (open) {
       setTimeout(() => {
         const overflow = bankPanel.getBoundingClientRect().bottom - (window.innerHeight - 16);
