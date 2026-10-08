@@ -55,8 +55,8 @@ img { display: block; max-width: 100%; height: auto; }
 /* Layout */
 .layout {
   flex: 1; width: 100%;
-  max-width: 600px; margin: 0 auto; align-content: center;
-  padding: 2rem var(--pad) 2rem;
+  max-width: 600px; margin: 0 auto; align-content: start;
+  padding: 2.25rem var(--pad) 2rem;
   display: grid; gap: 2rem;
 }
 
@@ -93,7 +93,23 @@ h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-
   display: grid; grid-template-columns: 52px 1fr auto; align-items: center; gap: 1rem;
   padding: 1.125rem;
 }
-.method + .method { border-block-start: 1px solid var(--line); }
+.methods > li + li { border-block-start: 1px solid var(--line); }
+.method-tap {
+  width: 100%; background: none; border: 0; font: inherit; color: inherit;
+  text-align: start; cursor: pointer; border-radius: var(--radius);
+  transition: background-color var(--fast) var(--ease-out);
+}
+.method-tap:active { background: var(--cream-btn); }
+.method-arrow { width: 22px; height: 22px; fill: var(--brass); }
+.copy-icon {
+  width: 40px; height: 40px; flex: none;
+  display: grid; place-items: center;
+  border: 1px solid var(--cream-btn-line); border-radius: 12px;
+  background: var(--cream-btn); color: var(--brass-deep); cursor: pointer;
+  transition: transform var(--fast) var(--ease-out);
+}
+.copy-icon svg { width: 20px; height: 20px; fill: currentColor; }
+.copy-icon:active { transform: scale(.94); }
 .method-logo { width: 52px; height: 52px; border-radius: 13px; }
 .bank-mark { display: grid; place-items: center; background: var(--cream-btn); color: var(--brass); }
 .bank-mark svg { width: 22px; height: 22px; fill: currentColor; }
@@ -102,20 +118,6 @@ h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-
 .method-detail { font-size: var(--step--1); color: var(--muted); }
 .method-detail.is-set { align-self: flex-start; color: var(--ink-soft); font-size: var(--step-0); font-weight: 600; }
 
-.action {
-  min-height: 44px; display: inline-flex; align-items: center; justify-content: center;
-  padding: 0 1.125rem; border-radius: 999px;
-  font: inherit; font-size: var(--step--1); font-weight: 700;
-  background: var(--cream-btn); color: var(--brass-deep);
-  border: 1px solid var(--cream-btn-line); cursor: pointer; text-decoration: none;
-  transition: opacity var(--fast) var(--ease-out), transform var(--fast) var(--ease-out);
-}
-.action:active { transform: scale(.97); }
-.action:disabled, .action[aria-disabled="true"] {
-  background: transparent; color: var(--muted); border: 1px dashed var(--line);
-  cursor: default; pointer-events: none;
-}
-.action-small { min-height: 34px; padding: 0 .875rem; }
 
 .bank-details {
   grid-column: 1 / -1;
@@ -183,7 +185,8 @@ h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-
 /* Focus and hover */
 a:focus-visible, button:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
 @media (hover: hover) {
-  .action:not(:disabled):not([aria-disabled="true"]):hover { opacity: .85; }
+  .method-tap:hover { background: rgba(243, 233, 214, .55); }
+  .copy-icon:hover { background: #ecdfc6; }
   .tile:hover { transform: translateY(-2px); }
   .credit:hover { opacity: .8; }
 }
