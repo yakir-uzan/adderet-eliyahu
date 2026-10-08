@@ -35,11 +35,32 @@ function setup() {
   const toggle = $("donate-toggle");
   const panel = $("donate-panel");
   panel.inert = true;
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const scrollToY = (top) => window.scrollTo({ top, behavior: reduceMotion ? "auto" : "smooth" });
+  const section = $("donate");
+
+  // When opened: scroll the logo out of view so the donation options sit in the middle of the screen.
+  function centerDonations() {
+    const rect = section.getBoundingClientRect();
+    const spare = Math.max(16, (window.innerHeight - rect.height) / 2);
+    const heroBottom = window.scrollY + document.querySelector(".hero").getBoundingClientRect().bottom;
+    const target = Math.max(window.scrollY + rect.top - spare, heroBottom);
+    const needed = target + window.innerHeight;
+    if (document.documentElement.scrollHeight < needed) document.body.style.minHeight = `${needed}px`;
+    scrollToY(target);
+  }
+
   toggle.addEventListener("click", () => {
     const open = toggle.getAttribute("aria-expanded") !== "true";
     toggle.setAttribute("aria-expanded", String(open));
     panel.classList.toggle("open", open);
     panel.inert = !open;
+    if (open) {
+      setTimeout(centerDonations, reduceMotion ? 0 : 340);
+    } else {
+      scrollToY(0);
+      setTimeout(() => { document.body.style.minHeight = ""; }, 400);
+    }
   });
 
   const toast = document.querySelector(".toast");
