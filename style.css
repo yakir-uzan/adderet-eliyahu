@@ -111,8 +111,6 @@ h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-
 .copy-icon svg { width: 20px; height: 20px; fill: currentColor; }
 .copy-icon:active { transform: scale(.94); }
 .method-logo { width: 52px; height: 52px; border-radius: 13px; }
-.bank-mark { display: grid; place-items: center; background: var(--cream-btn); color: var(--brass); }
-.bank-mark svg { width: 22px; height: 22px; fill: currentColor; }
 .method-text { display: flex; flex-direction: column; min-width: 0; }
 .method-name { font-size: 1.125rem; font-weight: 700; line-height: 1.3; }
 .method-detail { font-size: var(--step--1); color: var(--muted); }
