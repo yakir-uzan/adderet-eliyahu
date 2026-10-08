@@ -135,7 +135,7 @@ function setup() {
     }
     const app = APPS[btn.dataset.app];
     if (!app) {
-      show(copied ? "מספר החשבון הועתק" : btn.dataset.copy);
+      show(copied ? `${btn.dataset.label || "המספר"} הועתק` : btn.dataset.copy);
       return;
     }
     const url = appUrl(app);
