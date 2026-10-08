@@ -1,8 +1,10 @@
 /* Direction: "stone & ink" — the page reads like a building's entrance plaque:
    Jerusalem-stone ground, near-black ink, one brass accent, the shul's logo on top. */
 
-@font-face { font-family: "Frank Ruhl Libre"; src: url("assets/FrankRuhlLibre.ttf") format("truetype"); font-weight: 300 900; font-display: swap; }
-@font-face { font-family: "Assistant"; src: url("assets/Assistant.ttf") format("truetype"); font-weight: 200 800; font-display: swap; }
+@font-face { font-family: "Plex Hebrew"; src: url("assets/Plex-Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Plex Hebrew"; src: url("assets/Plex-Medium.ttf") format("truetype"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Plex Hebrew"; src: url("assets/Plex-SemiBold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Plex Hebrew"; src: url("assets/Plex-Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
 
 :root {
   --stone: #f4efe6;
@@ -15,14 +17,14 @@
   --night: #1c2420;
   --night-text: #d9d4c8;
 
-  --serif: "Frank Ruhl Libre", "David Libre", serif;
-  --sans: "Assistant", "Heebo", sans-serif;
+  --serif: "Plex Hebrew", sans-serif;
+  --sans: "Plex Hebrew", sans-serif;
 
   --step--1: .875rem;
   --step-0: 1.0625rem;
   --step-1: 1.375rem;
   --step-2: 1.75rem;
-  --step-hero: clamp(3.25rem, 13vw, 5.5rem);
+  --step-hero: clamp(2.75rem, 11vw, 4.5rem);
 
   --gap: 1.25rem;
   --pad: clamp(1.25rem, 5vw, 2.5rem);
@@ -61,17 +63,17 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .eyebrow { font-size: var(--step--1); color: var(--brass); font-weight: 600; letter-spacing: .02em; }
 h1 {
-  font-family: var(--serif); font-weight: 500;
-  font-size: var(--step-hero); line-height: 1; margin-top: .375rem;
-  letter-spacing: -.01em;
+  font-family: var(--serif); font-weight: 700;
+  font-size: var(--step-hero); line-height: 1.05; margin-top: .375rem;
+  letter-spacing: -.025em;
 }
-.dedication { font-family: var(--serif); font-size: var(--step-1); color: var(--ink-soft); margin-top: .5rem; }
+.dedication { font-family: var(--serif); font-weight: 400; font-size: var(--step-1); color: var(--ink-soft); margin-top: .5rem; }
 .address { color: var(--muted); margin-top: .25rem; }
 
 
 /* Sections */
 .actions { display: grid; gap: 1.5rem; }
-h2 { font-family: var(--serif); font-weight: 500; font-size: var(--step-2); line-height: 1.2; }
+h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-size: var(--step-2); line-height: 1.2; }
 .section-sub { color: var(--muted); margin-top: .375rem; max-width: 46ch; }
 
 /* Donation methods */
