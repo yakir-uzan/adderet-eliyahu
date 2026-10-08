@@ -45,8 +45,9 @@ function setup() {
     const spare = Math.max(16, (window.innerHeight - rect.height) / 2);
     const heroBottom = window.scrollY + document.querySelector(".hero").getBoundingClientRect().bottom;
     const target = Math.max(window.scrollY + rect.top - spare, heroBottom);
-    const needed = target + window.innerHeight;
-    if (document.documentElement.scrollHeight < needed) document.body.style.minHeight = `${needed}px`;
+    // Extra room at the bottom so the page can scroll that far (padding, not min-height, so the centered area does not grow).
+    const missing = target + window.innerHeight - document.documentElement.scrollHeight;
+    if (missing > 0) document.body.style.paddingBottom = `${missing}px`;
     scrollToY(target);
   }
 
@@ -59,7 +60,7 @@ function setup() {
       setTimeout(centerDonations, reduceMotion ? 0 : 340);
     } else {
       scrollToY(0);
-      setTimeout(() => { document.body.style.minHeight = ""; }, 400);
+      setTimeout(() => { document.body.style.paddingBottom = ""; }, 400);
     }
   });
 
