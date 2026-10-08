@@ -153,12 +153,15 @@ a.method-tap { text-decoration: none; }
   transition: transform var(--fast) var(--ease-out), box-shadow var(--fast) var(--ease-out);
 }
 .tile:active { transform: scale(.985); }
-.tile-donate {
+/* The donation card: the tile is its header and the options open inside the same card */
+.donate {
   background: linear-gradient(135deg, #ffffff 0%, var(--surface) 100%);
-  color: var(--ink);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line); border-radius: 22px;
   box-shadow: 0 14px 30px -18px rgba(74, 52, 22, .45);
+  overflow: hidden;
 }
+.tile-donate { background: none; color: var(--ink); border-radius: 0; }
+.tile-donate:active { transform: none; background: rgba(243, 233, 214, .45); }
 .tile-wa {
   background: linear-gradient(135deg, #2fcf6a 0%, #1fa855 45%, #128c4a 100%);
   box-shadow: 0 12px 26px -12px rgba(18, 140, 74, .65), inset 0 1px 0 rgba(255, 255, 255, .25);
@@ -182,7 +185,10 @@ a.method-tap { text-decoration: none; }
 .panel { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 320ms var(--ease-out), opacity 240ms var(--ease-out); }
 .panel.open { grid-template-rows: 1fr; opacity: 1; }
 .panel-inner { overflow: hidden; min-height: 0; }
-.panel .methods { margin-top: 1rem; }
+.panel .methods {
+  margin: 0; background: none; border: 0; border-radius: 0;
+  border-block-start: 1px solid var(--line);
+}
 
 /* Footer is pinned to the bottom of the screen and never moves; content scrolls under a soft fade */
 .footer {
@@ -202,7 +208,8 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--brass); outline
 @media (hover: hover) {
   .method-tap:hover { background: rgba(243, 233, 214, .55); }
   .copy-inline:hover { color: var(--brass-deep); }
-  .tile:hover { transform: translateY(-2px); }
+  .tile-wa:hover { transform: translateY(-2px); }
+  .tile-donate:hover { background: rgba(243, 233, 214, .3); }
   .credit:hover { opacity: .8; }
 }
 
