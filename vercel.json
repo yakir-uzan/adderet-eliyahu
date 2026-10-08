@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "rm -rf public && mkdir public && cp -r index.html style.css app.js assets public/ && sed -i \"s/?v=dev/?v=${VERCEL_GIT_COMMIT_SHA:0:8}/g\" public/index.html",
+  "outputDirectory": "public",
+  "headers": [
+    { "source": "/(.*)", "headers": [
+      { "key": "X-Content-Type-Options", "value": "nosniff" },
+      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+      { "key": "X-Frame-Options", "value": "DENY" }
+    ] }
+  ]
+}
