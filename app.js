@@ -1,4 +1,4 @@
-// הפרטים שמשתנים. ערך ריק = הכרטיס לא מוצג (או, בקבוצה, נשאר קישור לרב).
+// הפרטים שמשתנים. ערך ריק = מוצג "יעודכן בקרוב" (או, בקבוצה, נשאר קישור לרב).
 const LINKS = {
   bitPhone: "",       // לדוגמה "050-000-0000"
   payboxUrl: "",      // קישור לקבוצת הפייבוקס (https://links.payboxapp.com/...)
@@ -6,19 +6,26 @@ const LINKS = {
 };
 
 const isHttps = (u) => /^https:\/\/[^\s"'<>]+$/.test(u);
+const $ = (id) => document.getElementById(id);
 
 function setup() {
   if (LINKS.bitPhone) {
-    document.getElementById("bit-phone").textContent = LINKS.bitPhone;
-    document.getElementById("bit-copy").dataset.copy = LINKS.bitPhone.replace(/\D/g, "");
-    document.getElementById("pay-bit").hidden = false;
+    const detail = $("bit-detail");
+    detail.textContent = LINKS.bitPhone;
+    detail.classList.add("num", "is-set");
+    const copy = $("bit-copy");
+    copy.dataset.copy = LINKS.bitPhone.replace(/\D/g, "");
+    copy.disabled = false;
   }
   if (isHttps(LINKS.payboxUrl)) {
-    const a = document.getElementById("pay-paybox");
-    a.href = LINKS.payboxUrl;
-    a.hidden = false;
+    const link = $("paybox-link");
+    link.href = LINKS.payboxUrl;
+    link.removeAttribute("aria-disabled");
+    const detail = $("paybox-detail");
+    detail.textContent = "תרומה בלחיצה";
+    detail.classList.add("is-set");
   }
-  if (isHttps(LINKS.whatsappGroup)) document.getElementById("wa-join").href = LINKS.whatsappGroup;
+  if (isHttps(LINKS.whatsappGroup)) $("wa-join").href = LINKS.whatsappGroup;
 
   const toast = document.querySelector(".toast");
   let timer;
@@ -27,7 +34,7 @@ function setup() {
     if (!btn || !btn.dataset.copy) return;
     try {
       await navigator.clipboard.writeText(btn.dataset.copy);
-      toast.textContent = "הועתק ✓";
+      toast.textContent = "הועתק";
     } catch {
       toast.textContent = btn.dataset.copy;
     }

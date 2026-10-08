@@ -7,81 +7,103 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>בית כנסת אדרת אליהו · קריית גת</title>
   <meta name="description" content="בית כנסת אדרת אליהו, על שם אליהו אוזן ז״ל. שדרות גת 124, קריית גת. תרומות והצטרפות לקבוצת העדכונים.">
-  <meta name="theme-color" content="#fbf6ec">
+  <meta name="theme-color" content="#f4efe6">
   <meta property="og:title" content="בית כנסת אדרת אליהו">
   <meta property="og:description" content="תרומות לבית הכנסת והצטרפות לקבוצת העדכונים בווצאפ">
   <meta property="og:image" content="https://yakir-uzan.github.io/adderet-eliyahu/assets/og.jpg">
   <meta property="og:locale" content="he_IL">
   <link rel="icon" href="assets/icon-180.png">
   <link rel="apple-touch-icon" href="assets/icon-180.png">
-  <link rel="preload" href="assets/Rubik.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/FrankRuhlLibre.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="assets/Assistant.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
 </head>
 <body>
-  <main class="wrap">
-    <header class="hero">
-      <span class="bsd">בס״ד</span>
-      <img class="logo" src="assets/logo.webp" width="624" height="640" alt="בית כנסת אדרת אליהו – על שם אליהו אוזן ז״ל">
-      <p class="lead">שדרות גת 124, קריית גת · נוסח ספרדי</p>
-    </header>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="אדרת אליהו – לראש הדף">
+      <img src="assets/logo.webp" width="624" height="640" alt="">
+      <span>אדרת אליהו</span>
+    </a>
+    <span class="topbar-place">קריית גת</span>
+  </header>
 
-    <section class="card" aria-labelledby="donate-title">
-      <div class="card-head">
-        <span class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.3C.9 8.3 3 4.5 6.7 4.5c2.1 0 3.6 1.2 4.3 2.4.7-1.2 2.2-2.4 4.3-2.4 3.7 0 5.8 3.8 4.3 7.2C19.5 16.4 12 21 12 21z"/></svg>
-        </span>
-        <div>
-          <h2 id="donate-title">תרומה לבית הכנסת</h2>
-          <p class="sub">״ועשו לי מקדש ושכנתי בתוכם״</p>
-        </div>
-      </div>
+  <div class="layout" id="top">
+    <section class="hero" aria-labelledby="shul-name">
+      <figure class="arch">
+        <img src="assets/building.webp" width="760" height="720" alt="חזית בית הכנסת אדרת אליהו">
+      </figure>
+      <p class="eyebrow">בית כנסת · נוסח ספרדי</p>
+      <h1 id="shul-name">אדרת אליהו</h1>
+      <p class="dedication">על שם אליהו אוזן ז״ל</p>
+      <p class="address">שדרות גת 124, קריית גת</p>
+      <nav class="jump" aria-label="קיצורי דרך">
+        <a href="#donate">לתרומה</a>
+        <a href="#group">לקבוצת העדכונים</a>
+      </nav>
+    </section>
 
-      <!-- ביט, פייבוקס וקישור הקבוצה מוגדרים ב-app.js (LINKS) -->
-      <div class="pay-grid">
-        <div class="pay pay-bit" id="pay-bit" hidden>
-          <span class="pay-name">ביט</span>
-          <span class="pay-val num" id="bit-phone"></span>
-          <button class="btn btn-ghost" type="button" id="bit-copy" data-copy="">העתקת המספר</button>
-        </div>
-        <a class="pay pay-paybox" id="pay-paybox" href="#" target="_blank" rel="noopener noreferrer" hidden>
-          <span class="pay-name">פייבוקס</span>
-          <span class="pay-val">תרומה בלחיצה</span>
-          <span class="btn btn-ghost" aria-hidden="true">לתשלום</span>
+    <div class="actions">
+      <section class="donate" id="donate" aria-labelledby="donate-title">
+        <h2 id="donate-title">תרומה לבית הכנסת</h2>
+        <p class="section-sub">כל תרומה מסייעת בהחזקת בית הכנסת, בספרי הקודש ובפעילות הקהילה.</p>
+
+        <!-- הפרטים של ביט, פייבוקס וקבוצת הווצאפ מוגדרים ב-app.js (LINKS) -->
+        <ul class="methods">
+          <li class="method" id="pay-bit">
+            <img class="method-logo" src="assets/bit.png" width="120" height="120" alt="">
+            <div class="method-text">
+              <span class="method-name">ביט</span>
+              <span class="method-detail" id="bit-detail">המספר יעודכן בקרוב</span>
+            </div>
+            <button class="action" type="button" id="bit-copy" data-copy="" disabled>העתקה</button>
+          </li>
+          <li class="method" id="pay-paybox">
+            <img class="method-logo" src="assets/paybox.png" width="120" height="120" alt="">
+            <div class="method-text">
+              <span class="method-name">פייבוקס</span>
+              <span class="method-detail" id="paybox-detail">הקישור יעודכן בקרוב</span>
+            </div>
+            <a class="action" id="paybox-link" aria-disabled="true" target="_blank" rel="noopener noreferrer">לתשלום</a>
+          </li>
+          <li class="method method-bank">
+            <span class="method-logo bank-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3 3 7.5V9h18V7.5L12 3zM5 10.5v6h2v-6H5zm4 0v6h2v-6H9zm4 0v6h2v-6h-2zm4 0v6h2v-6h-2zM3 18v2h18v-2H3z"/></svg>
+            </span>
+            <div class="method-text">
+              <span class="method-name">העברה בנקאית</span>
+              <span class="method-detail">עמותת שערי זריזות</span>
+            </div>
+            <dl class="bank-details">
+              <div><dt>בנק</dt><dd>מרכנתיל דיסקונט <span class="num">(17)</span></dd></div>
+              <div><dt>סניף</dt><dd><span class="num">740</span> · יהודה הנשיא</dd></div>
+              <div class="account">
+                <dt>מספר חשבון</dt>
+                <dd><span class="num">69734714</span><button class="action action-small" type="button" data-copy="69734714">העתקה</button></dd>
+              </div>
+            </dl>
+          </li>
+        </ul>
+
+        <p class="contact">להקדשות ולפרטים: הרב יעקב אוזן, <a class="num" href="tel:+972527610018">052-76-100-18</a></p>
+      </section>
+
+      <section class="group" id="group" aria-labelledby="group-title">
+        <h2 id="group-title">קבוצת העדכונים</h2>
+        <p>זמני תפילות, שיעורים והודעות הקהילה, ישירות לווצאפ.</p>
+        <a class="wa-button" id="wa-join" href="https://wa.me/972527610018?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%94%D7%A6%D7%98%D7%A8%D7%A3%20%D7%9C%D7%A7%D7%91%D7%95%D7%A6%D7%AA%20%D7%94%D7%A2%D7%93%D7%9B%D7%95%D7%A0%D7%99%D7%9D%20%D7%A9%D7%9C%20%D7%91%D7%99%D7%AA%20%D7%94%D7%9B%D7%A0%D7%A1%D7%AA" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2a9.7 9.7 0 0 0-8.4 14.6L2.3 21.8l5.1-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.3-.3z"/></svg>
+          הצטרפות לקבוצה
         </a>
-      </div>
+      </section>
+    </div>
+  </div>
 
-      <div class="bank">
-        <h3>העברה בנקאית</h3>
-        <dl>
-          <div><dt>שם החשבון</dt><dd>עמותת שערי זריזות</dd></div>
-          <div><dt>בנק</dt><dd>מרכנתיל דיסקונט (17)</dd></div>
-          <div><dt>סניף</dt><dd><span class="num">740</span> – יהודה הנשיא</dd></div>
-          <div class="acct"><dt>מספר חשבון</dt><dd><span class="num">69734714</span><button class="btn btn-small" type="button" data-copy="69734714">העתקה</button></dd></div>
-        </dl>
-      </div>
+  <footer class="footer">
+    <span>בית כנסת אדרת אליהו</span>
+    <span>שדרות גת 124, קריית גת</span>
+  </footer>
 
-      <p class="note">לפרטים והקדשות: הרב יעקב אוזן <a class="num" href="tel:+972527610018">052-76-100-18</a></p>
-    </section>
-
-    <section class="card card-wa" aria-labelledby="wa-title">
-      <div class="card-head">
-        <span class="icon icon-wa" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M12 2.2a9.7 9.7 0 0 0-8.4 14.6L2.3 21.8l5.1-1.3A9.7 9.7 0 1 0 12 2.2zm0 17.7c-1.5 0-3-.4-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 19.9zm4.4-6c-.2-.1-1.4-.7-1.6-.8-.2-.1-.4-.1-.6.1l-.7.9c-.1.2-.3.2-.5.1a6.5 6.5 0 0 1-3.2-2.8c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.7-1.7c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 2s.8 2.3.9 2.5c.1.2 1.6 2.5 4 3.5 1.5.6 2 .7 2.8.6.5-.1 1.4-.6 1.6-1.1.2-.5.2-1 .1-1.1l-.3-.3z"/></svg>
-        </span>
-        <div>
-          <h2 id="wa-title">קבוצת העדכונים בווצאפ</h2>
-          <p class="sub">זמני תפילות, שיעורים ושמחות של הקהילה</p>
-        </div>
-      </div>
-      <a class="btn btn-wa" id="wa-join" href="https://wa.me/972527610018?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%94%D7%A6%D7%98%D7%A8%D7%A3%20%D7%9C%D7%A7%D7%91%D7%95%D7%A6%D7%AA%20%D7%94%D7%A2%D7%93%D7%9B%D7%95%D7%A0%D7%99%D7%9D%20%D7%A9%D7%9C%20%D7%91%D7%99%D7%AA%20%D7%94%D7%9B%D7%A0%D7%A1%D7%AA" target="_blank" rel="noopener noreferrer">הצטרפות לקבוצה</a>
-    </section>
-
-    <footer class="foot">
-      <p>בית כנסת אדרת אליהו · על שם אליהו אוזן ז״ל</p>
-      <p>שדרות גת 124, קריית גת</p>
-    </footer>
-  </main>
   <div class="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
