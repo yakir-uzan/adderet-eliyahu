@@ -51,13 +51,13 @@ img { display: block; max-width: 100%; height: auto; }
 .layout {
   max-width: 600px; margin: 0 auto;
   padding: 1.75rem var(--pad) 2.5rem;
-  display: grid; gap: 3rem;
+  display: grid; gap: 2rem;
 }
 
 /* Hero */
 .hero { text-align: center; }
 .logo {
-  width: 120px; margin: 0 auto 1rem;
+  width: 120px; margin: 0 auto .375rem;
   filter: drop-shadow(0 6px 16px rgba(29, 27, 24, .12));
   animation: rise var(--enter) var(--ease-out) both;
 }
@@ -68,7 +68,8 @@ h1 {
   letter-spacing: -.025em;
 }
 .dedication { font-family: var(--serif); font-weight: 400; font-size: var(--step-1); color: var(--ink-soft); margin-top: .5rem; }
-.address { color: var(--muted); margin-top: .25rem; }
+.address { font-size: var(--step--1); color: var(--muted); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 
 /* Sections */
