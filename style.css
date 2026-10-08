@@ -73,7 +73,7 @@ h1 {
 
 
 /* Sections */
-.actions { display: grid; gap: 1.5rem; }
+.actions { display: grid; }
 h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-size: var(--step-2); line-height: 1.2; }
 .section-sub { color: var(--muted); margin-top: .375rem; max-width: 46ch; }
 
@@ -125,18 +125,45 @@ h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-
 .contact { margin-top: 1rem; font-size: var(--step--1); color: var(--muted); }
 .contact a { color: var(--ink); font-weight: 700; text-decoration: none; border-block-end: 1px solid var(--brass); }
 
-/* WhatsApp: one green button straight into the group */
-.wa-button {
-  width: 100%; min-height: 58px;
-  display: flex; align-items: center; justify-content: center; gap: .625rem;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #2fcf6a 0%, #1fa855 45%, #128c4a 100%);
-  color: #fff; font-weight: 700; font-size: 1.125rem; text-decoration: none;
-  box-shadow: 0 10px 24px -8px rgba(18, 140, 74, .55), inset 0 1px 0 rgba(255, 255, 255, .25);
+/* The two main tiles */
+.actions { gap: 1rem; }
+.tile {
+  width: 100%; min-height: 96px;
+  display: grid; grid-template-columns: 52px 1fr 24px; align-items: center; gap: 1rem;
+  padding: 1.125rem 1.25rem; border: 0; border-radius: 18px;
+  font: inherit; text-align: start; text-decoration: none; cursor: pointer;
+  color: #fff;
   transition: transform var(--fast) var(--ease-out), box-shadow var(--fast) var(--ease-out);
 }
-.wa-button svg { width: 24px; height: 24px; fill: currentColor; }
-.wa-button:active { transform: scale(.98); }
+.tile:active { transform: scale(.985); }
+.tile-donate {
+  background: linear-gradient(135deg, #2b2620 0%, #1d1b18 60%, #14120f 100%);
+  box-shadow: 0 12px 26px -12px rgba(29, 27, 24, .6), inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+.tile-wa {
+  background: linear-gradient(135deg, #2fcf6a 0%, #1fa855 45%, #128c4a 100%);
+  box-shadow: 0 12px 26px -12px rgba(18, 140, 74, .65), inset 0 1px 0 rgba(255, 255, 255, .25);
+}
+.tile-icon {
+  width: 52px; height: 52px; border-radius: 14px;
+  display: grid; place-items: center;
+  background: rgba(255, 255, 255, .12);
+}
+.tile-donate .tile-icon { color: #d9b77a; }
+.tile-icon svg { width: 26px; height: 26px; fill: currentColor; }
+.tile-text { display: flex; flex-direction: column; gap: .125rem; min-width: 0; }
+.tile-title { font-size: 1.3125rem; font-weight: 700; line-height: 1.25; }
+.tile-sub { font-size: var(--step--1); opacity: .8; }
+.tile-chevron { width: 24px; height: 24px; fill: currentColor; opacity: .75; transition: transform 240ms var(--ease-out); }
+.tile-chevron-down { transform: rotate(-90deg); }
+.tile[aria-expanded="true"] .tile-chevron-down { transform: rotate(90deg); }
+.tile-donate[aria-expanded="true"] { border-end-start-radius: 6px; border-end-end-radius: 6px; }
+
+/* Donation panel, collapsed until the tile is pressed */
+.panel { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 320ms var(--ease-out), opacity 240ms var(--ease-out); }
+.panel.open { grid-template-rows: 1fr; opacity: 1; }
+.panel-inner { overflow: hidden; min-height: 0; }
+.panel .section-sub { margin-top: 1rem; }
 
 .footer {
   display: flex; justify-content: center;
@@ -150,7 +177,7 @@ h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-
 a:focus-visible, button:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
 @media (hover: hover) {
   .action:not(:disabled):not([aria-disabled="true"]):hover { opacity: .85; }
-  .wa-button:hover { transform: translateY(-1px); box-shadow: 0 14px 28px -8px rgba(18, 140, 74, .6), inset 0 1px 0 rgba(255, 255, 255, .25); }
+  .tile:hover { transform: translateY(-2px); }
   .credit:hover { opacity: .8; }
 }
 

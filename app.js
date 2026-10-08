@@ -27,6 +27,16 @@ function setup() {
   }
   if (isHttps(LINKS.whatsappGroup)) $("wa-join").href = LINKS.whatsappGroup;
 
+  const toggle = $("donate-toggle");
+  const panel = $("donate-panel");
+  panel.inert = true;
+  toggle.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    toggle.setAttribute("aria-expanded", String(open));
+    panel.classList.toggle("open", open);
+    panel.inert = !open;
+  });
+
   const toast = document.querySelector(".toast");
   let timer;
   document.addEventListener("click", async (e) => {
