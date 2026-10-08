@@ -139,19 +139,19 @@ h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-
 .wa-button:active { transform: scale(.98); }
 
 .footer {
-  padding: 1.25rem var(--pad) calc(1.25rem + env(safe-area-inset-bottom));
+  display: flex; justify-content: center;
+  padding: 1.5rem var(--pad) calc(1.5rem + env(safe-area-inset-bottom));
   border-block-start: 1px solid var(--line);
-  text-align: center; font-size: var(--step--1);
 }
-.footer a { color: var(--muted); text-decoration: none; }
-.footer span { font-weight: 700; letter-spacing: .06em; color: var(--ink); }
+.credit { display: block; border-radius: 6px; transition: opacity var(--fast) var(--ease-out); }
+.credit img { width: min(68vw, 250px); }
 
 /* Focus and hover */
 a:focus-visible, button:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
 @media (hover: hover) {
   .action:not(:disabled):not([aria-disabled="true"]):hover { opacity: .85; }
   .wa-button:hover { transform: translateY(-1px); box-shadow: 0 14px 28px -8px rgba(18, 140, 74, .6), inset 0 1px 0 rgba(255, 255, 255, .25); }
-  .footer a:hover span { color: var(--brass); }
+  .credit:hover { opacity: .8; }
 }
 
 .toast {
