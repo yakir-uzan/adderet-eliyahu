@@ -63,6 +63,22 @@ function setup() {
     }
   });
 
+  const bankToggle = $("bank-toggle");
+  const bankPanel = $("bank-panel");
+  bankPanel.inert = true;
+  bankToggle.addEventListener("click", () => {
+    const open = bankToggle.getAttribute("aria-expanded") !== "true";
+    bankToggle.setAttribute("aria-expanded", String(open));
+    bankPanel.classList.toggle("open", open);
+    bankPanel.inert = !open;
+    if (open) {
+      setTimeout(() => {
+        const overflow = bankPanel.getBoundingClientRect().bottom - (window.innerHeight - 16);
+        if (overflow > 0) window.scrollBy({ top: overflow, behavior: reduceMotion ? "auto" : "smooth" });
+      }, reduceMotion ? 0 : 340);
+    }
+  });
+
   const toast = document.querySelector(".toast");
   let timer;
   const show = (text, ms = 1800) => {

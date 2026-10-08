@@ -63,20 +63,28 @@
               <svg class="method-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg>
             </button>
           </li>
-          <li class="method method-bank">
-            <img class="method-logo" src="assets/mercantile.png" width="120" height="120" alt="">
-            <div class="method-text">
-              <span class="method-name">העברה בנקאית</span>
-              <span class="method-detail">עמותת שערי זריזות</span>
-            </div>
-            <dl class="bank-details">
-              <div><dt>בנק</dt><dd>מרכנתיל דיסקונט <span class="num">(17)</span></dd></div>
-              <div><dt>סניף</dt><dd><span class="num">740</span> · יהודה הנשיא</dd></div>
-              <div class="account">
-                <dt>מספר חשבון</dt>
-                <dd><span class="num">69734714</span><button class="copy-icon" type="button" data-copy="69734714" aria-label="העתקת מספר החשבון"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg></button></dd>
+          <li class="method-bank">
+            <button class="method method-tap" type="button" id="bank-toggle" aria-expanded="false" aria-controls="bank-panel">
+              <img class="method-logo" src="assets/mercantile.png" width="120" height="120" alt="">
+              <span class="method-text">
+                <span class="method-name">העברה בנקאית</span>
+                <span class="method-detail">לחצו לפרטי החשבון</span>
+              </span>
+              <svg class="method-arrow method-arrow-down" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.4 7.4 14 6l-6 6 6 6 1.4-1.4L10.8 12z"/></svg>
+            </button>
+            <div class="panel" id="bank-panel" role="region" aria-labelledby="bank-toggle">
+              <div class="panel-inner">
+                <dl class="bank-details">
+                  <div class="field field-wide"><dt>שם החשבון</dt><dd>עמותת שערי זריזות</dd></div>
+                  <div class="field"><dt>בנק</dt><dd>מרכנתיל <span class="num">(17)</span></dd></div>
+                  <div class="field"><dt>סניף</dt><dd><span class="num">740</span> יהודה הנשיא</dd></div>
+                  <div class="field field-wide field-account">
+                    <dt>מספר חשבון</dt>
+                    <dd><span class="num">69734714</span><button class="copy-icon" type="button" data-copy="69734714" aria-label="העתקת מספר החשבון"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg></button></dd>
+                  </div>
+                </dl>
               </div>
-            </dl>
+            </div>
           </li>
         </ul>
 
