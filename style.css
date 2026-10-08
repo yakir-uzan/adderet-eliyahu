@@ -1,5 +1,5 @@
 /* Direction: "stone & ink" — the page reads like a building's entrance plaque:
-   Jerusalem-stone ground, near-black ink, one brass accent, an arch from the facade windows. */
+   Jerusalem-stone ground, near-black ink, one brass accent, the shul's logo on top. */
 
 @font-face { font-family: "Frank Ruhl Libre"; src: url("assets/FrankRuhlLibre.ttf") format("truetype"); font-weight: 300 900; font-display: swap; }
 @font-face { font-family: "Assistant"; src: url("assets/Assistant.ttf") format("truetype"); font-weight: 200 800; font-display: swap; }
@@ -45,34 +45,20 @@ body {
 img { display: block; max-width: 100%; height: auto; }
 .num { direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
 
-/* Top bar */
-.topbar {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: .75rem var(--pad);
-  border-block-end: 1px solid var(--line);
-}
-.brand { display: flex; align-items: center; gap: .625rem; color: var(--ink); text-decoration: none; font-weight: 700; }
-.brand img { width: 36px; height: 36px; object-fit: contain; }
-.topbar-place { font-size: var(--step--1); color: var(--muted); }
-
 /* Layout */
 .layout {
-  max-width: 1120px; margin: 0 auto;
-  padding: 2rem var(--pad) 3rem;
+  max-width: 600px; margin: 0 auto;
+  padding: 1.75rem var(--pad) 2.5rem;
   display: grid; gap: 3rem;
 }
 
 /* Hero */
 .hero { text-align: center; }
-.arch {
-  width: min(100% - 20px, 270px); margin: 8px auto 1.5rem;
-  aspect-ratio: 19 / 20;
-  border-radius: 999px 999px 6px 6px;
-  overflow: hidden;
-  outline: 1px solid var(--brass); outline-offset: 7px;
-  animation: arch-in var(--enter) var(--ease-out) both;
+.logo {
+  width: min(56vw, 210px); margin: 0 auto 1.25rem;
+  filter: drop-shadow(0 6px 16px rgba(29, 27, 24, .12));
+  animation: rise var(--enter) var(--ease-out) both;
 }
-.arch img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
 .eyebrow { font-size: var(--step--1); color: var(--brass); font-weight: 600; letter-spacing: .02em; }
 h1 {
   font-family: var(--serif); font-weight: 500;
@@ -145,37 +131,34 @@ h2 { font-family: var(--serif); font-weight: 500; font-size: var(--step-2); line
 .contact { margin-top: 1rem; font-size: var(--step--1); color: var(--muted); }
 .contact a { color: var(--ink); font-weight: 700; text-decoration: none; border-block-end: 1px solid var(--brass); }
 
-/* WhatsApp group: the one dark block */
-.group {
-  background: var(--night); color: var(--night-text);
-  border-radius: var(--radius);
-  padding: 1.75rem 1.25rem;
-}
-.group h2 { color: #fff; }
-.group p { margin-top: .375rem; }
+/* WhatsApp: one green button straight into the group */
 .wa-button {
-  margin-top: 1.25rem; width: 100%; min-height: 54px;
+  width: 100%; min-height: 58px;
   display: flex; align-items: center; justify-content: center; gap: .625rem;
-  border-radius: 999px; background: #fff; color: var(--night);
-  font-weight: 700; font-size: 1.125rem; text-decoration: none;
-  transition: transform var(--fast) var(--ease-out);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2fcf6a 0%, #1fa855 45%, #128c4a 100%);
+  color: #fff; font-weight: 700; font-size: 1.125rem; text-decoration: none;
+  box-shadow: 0 10px 24px -8px rgba(18, 140, 74, .55), inset 0 1px 0 rgba(255, 255, 255, .25);
+  transition: transform var(--fast) var(--ease-out), box-shadow var(--fast) var(--ease-out);
 }
-.wa-button svg { width: 22px; height: 22px; fill: #1f8f4e; }
+.wa-button svg { width: 24px; height: 24px; fill: currentColor; }
 .wa-button:active { transform: scale(.98); }
 
 .footer {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem 1rem;
-  padding: 1.5rem var(--pad) calc(1.5rem + env(safe-area-inset-bottom));
+  padding: 1.25rem var(--pad) calc(1.25rem + env(safe-area-inset-bottom));
   border-block-start: 1px solid var(--line);
-  font-size: var(--step--1); color: var(--muted);
+  text-align: center; font-size: var(--step--1);
 }
+.footer a { color: var(--muted); text-decoration: none; }
+.footer span { font-weight: 700; letter-spacing: .06em; color: var(--ink); }
 
 /* Focus and hover */
 a:focus-visible, button:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
 @media (hover: hover) {
   .jump a:hover { background: var(--ink); color: var(--stone); }
   .action:not(:disabled):not([aria-disabled="true"]):hover { opacity: .85; }
-  .wa-button:hover { transform: translateY(-1px); }
+  .wa-button:hover { transform: translateY(-1px); box-shadow: 0 14px 28px -8px rgba(18, 140, 74, .6), inset 0 1px 0 rgba(255, 255, 255, .25); }
+  .footer a:hover span { color: var(--brass); }
 }
 
 .toast {
@@ -187,16 +170,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--brass); outline
 }
 .toast.show { opacity: 1; transform: translate(50%, 0); }
 
-/* Desktop: identity on the start side, actions beside it */
-@media (min-width: 900px) {
-  .layout { grid-template-columns: 5fr 6fr; gap: 4.5rem; align-items: start; padding-top: 3.5rem; }
-  .hero { position: sticky; top: 2rem; }
-  .arch { width: min(100% - 20px, 360px); }
-  .jump { display: none; }
-  .group { padding: 2rem; }
-}
-
-@keyframes arch-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
