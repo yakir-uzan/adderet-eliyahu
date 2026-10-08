@@ -171,7 +171,7 @@ h2 { font-family: var(--serif); font-weight: 600; letter-spacing: -.015em; font-
   border-block-start: 1px solid var(--line);
 }
 .credit { display: block; border-radius: 6px; transition: opacity var(--fast) var(--ease-out); }
-.credit img { width: min(68vw, 250px); }
+.credit img { width: 120px; }
 
 /* Focus and hover */
 a:focus-visible, button:focus-visible { outline: 2px solid var(--brass); outline-offset: 3px; }
