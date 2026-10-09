@@ -1,6 +1,3 @@
-// קישור ההזמנה לקבוצת הווצאפ (https://chat.whatsapp.com/...). ריק = הכפתור פותח שיחה עם הרב.
-const WHATSAPP_GROUP = "";
-
 // ביט ופייבוקס לא מאפשרים קישור עם מספר ממולא, אז מעתיקים את המספר ופותחים את האפליקציה.
 const APPS = {
   bit: {
@@ -30,8 +27,6 @@ function appUrl(app) {
 }
 
 function setup() {
-  if (/^https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]+$/.test(WHATSAPP_GROUP)) $("wa-join").href = WHATSAPP_GROUP;
-
   const toggle = $("donate-toggle");
   const panel = $("donate-panel");
   const bankToggle = $("bank-toggle");
