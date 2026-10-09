@@ -85,22 +85,45 @@ function setup() {
     scrollToY(target);
   }
 
+  // Closing mirrors opening in reverse: opening grows the panel and then scrolls down,
+  // closing scrolls back up first and then folds the panel, so nothing jumps.
+  const afterScrollToTop = (done) => {
+    if (reduceMotion || window.scrollY < 2) return done();
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      window.removeEventListener("scrollend", finish);
+      clearInterval(poll);
+      done();
+    };
+    window.addEventListener("scrollend", finish);
+    const poll = setInterval(() => { if (window.scrollY < 2) finish(); }, 50);
+    setTimeout(finish, 900); // never wait longer than this
+    scrollToY(0);
+  };
+
   let foldTimer;
+  let step = 0; // a newer click cancels a fold that is still waiting for the scroll
   toggle.addEventListener("click", () => {
     const open = !isOpen(toggle);
+    const mine = ++step;
     clearTimeout(foldTimer);
     if (open) {
       freeze();
       setOpen(toggle, panel, true);
       setTimeout(centerDonations, reduceMotion ? 0 : 340);
     } else {
-      setOpen(toggle, panel, false);
-      scrollToY(0);
-      foldTimer = setTimeout(() => {
-        setOpen(bankToggle, bankPanel, false);
-        unfreeze();
-        root.style.paddingBottom = "";
-      }, reduceMotion ? 0 : 450);
+      toggle.setAttribute("aria-expanded", "false"); // the arrow turns right away
+      afterScrollToTop(() => {
+        if (mine !== step) return;
+        setOpen(toggle, panel, false);
+        foldTimer = setTimeout(() => {
+          setOpen(bankToggle, bankPanel, false);
+          unfreeze();
+          root.style.paddingBottom = "";
+        }, reduceMotion ? 0 : 420);
+      });
     }
   });
 
